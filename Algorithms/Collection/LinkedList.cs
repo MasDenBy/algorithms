@@ -5,6 +5,10 @@ namespace Algorithms.Collection
 	public class LinkedList<T>
 	{
 		private Node<T> head;
+		private Node<T> tail;
+
+		public T Head => this.head == null ? default(T) : this.head.element;
+		public T Tail => this.tail == null ? default(T) : this.tail.element;
 
 		public void AddFirst(T value)
 		{
@@ -13,6 +17,7 @@ namespace Algorithms.Collection
 			if (this.head == null)
 			{
 				this.head = node;
+				this.tail = node;
 			}
 			else
 			{
@@ -29,12 +34,14 @@ namespace Algorithms.Collection
 			if (this.head == null)
 			{
 				this.head = node;
+				this.tail = node;
 			}
 			else
 			{
-				var lastNode = GetLastNode();
+				var lastNode = this.tail;
 				lastNode.next = node;
 				node.prev = lastNode;
+				this.tail = node;
 			}
 		}
 
@@ -47,11 +54,12 @@ namespace Algorithms.Collection
 
 		public void RemoveLast()
 		{
-			var lastNode = this.GetLastNode();
+			var lastNode = this.tail;
 
 			if(lastNode.prev != null)
 			{
 				lastNode.prev.next = null;
+				this.tail = lastNode.prev;
 			}
 			else
 			{
@@ -69,16 +77,6 @@ namespace Algorithms.Collection
 
 				node = node.next;
 			}
-		}
-
-		private Node<T> GetLastNode()
-		{
-			var node = this.head;
-
-			while (node.next != null)
-				node = node.next;
-
-			return node;
 		}
 
 		private class Node<T>

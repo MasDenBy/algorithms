@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Algorithms.Collection;
 using NUnit.Framework;
 
@@ -9,11 +7,12 @@ namespace AlgorithmsTest.Collection
 	[TestFixture]
 	public class CircularDequeTest
 	{
-		[Test]
-		public void EmptyDequeTest()
+		[TestCase(typeof(CircularDequeArray))]
+		[TestCase(typeof(CircularDequeLinkedList))]
+		public void EmptyDequeTest(Type circularDequeType)
 		{
 			// Arrange
-			var deque = new CircularDeque(3);
+			var deque = (ICircularDeque)Activator.CreateInstance(circularDequeType, 3);
 
 			// Act & Assert
 			Assert.IsFalse(deque.DeleteFront());
@@ -24,11 +23,12 @@ namespace AlgorithmsTest.Collection
 			Assert.IsFalse(deque.IsFull());
 		}
 
-		[Test]
-		public void Test1()
+		[TestCase(typeof(CircularDequeArray))]
+		[TestCase(typeof(CircularDequeLinkedList))]
+		public void Test1(Type circularDequeType)
 		{
 			// Arrange
-			var deque = new CircularDeque(3);
+			var deque = (ICircularDeque)Activator.CreateInstance(circularDequeType, 3);
 
 			// Act & Assert
 			Assert.IsTrue(deque.InsertLast(1));
@@ -42,11 +42,12 @@ namespace AlgorithmsTest.Collection
 			Assert.AreEqual(4, deque.GetFront());
 		}
 
-		[Test]
-		public void Test2()
+		[TestCase(typeof(CircularDequeArray))]
+		[TestCase(typeof(CircularDequeLinkedList))]
+		public void Test2(Type circularDequeType)
 		{
 			// Arrange
-			var deque = new CircularDeque(3);
+			var deque = (ICircularDeque)Activator.CreateInstance(circularDequeType, 3);
 
 			// Act & Assert
 			Assert.IsTrue(deque.InsertFront(2));
@@ -62,11 +63,12 @@ namespace AlgorithmsTest.Collection
 			Assert.AreEqual(4, deque.GetRear());
 		}
 
-		[Test]
-		public void Test3()
+		[TestCase(typeof(CircularDequeArray))]
+		[TestCase(typeof(CircularDequeLinkedList))]
+		public void Test3(Type circularDequeType)
 		{
 			// Arrange
-			var deque = new CircularDeque(3);
+			var deque = (ICircularDeque)Activator.CreateInstance(circularDequeType, 3);
 
 			// Act & Assert
 			Assert.IsTrue(deque.InsertFront(9));
@@ -82,11 +84,12 @@ namespace AlgorithmsTest.Collection
 			Assert.AreEqual(9, deque.GetFront());
 		}
 
-		[Test]
-		public void Test4()
+		[TestCase(typeof(CircularDequeArray))]
+		[TestCase(typeof(CircularDequeLinkedList))]
+		public void Test4(Type circularDequeType)
 		{
 			// Arrange
-			var deque = new CircularDeque(3);
+			var deque = (ICircularDeque)Activator.CreateInstance(circularDequeType, 3);
 
 			// Act & Assert
 			Assert.IsTrue(deque.InsertFront(8));
@@ -102,11 +105,12 @@ namespace AlgorithmsTest.Collection
 			Assert.IsTrue(deque.IsFull());
 		}
 
-		[Test]
-		public void Test5()
+		[TestCase(typeof(CircularDequeArray))]
+		[TestCase(typeof(CircularDequeLinkedList))]
+		public void Test5(Type circularDequeType)
 		{
 			// Arrange
-			var deque = new CircularDeque(4);
+			var deque = (ICircularDeque)Activator.CreateInstance(circularDequeType, 4);
 
 			// Act & Assert
 			Assert.IsTrue(deque.InsertFront(9));
@@ -122,33 +126,36 @@ namespace AlgorithmsTest.Collection
 			Assert.IsTrue(deque.InsertFront(6));
 		}
 
-		[Test]
-		public void FrontPointTheSameElementAsRearTest()
+		[TestCase(typeof(CircularDequeArray))]
+		[TestCase(typeof(CircularDequeLinkedList))]
+		public void FrontPointTheSameElementAsRearTest(Type circularDequeType)
 		{
 			// Arrange
-			var deque = new CircularDeque(4);
+			var deque = (ICircularDeque)Activator.CreateInstance(circularDequeType, 4);
 
 			// Act & Assert
 			Assert.IsTrue(deque.InsertLast(1));
 			Assert.AreEqual(1, deque.GetFront());
 		}
 
-		[Test]
-		public void RearPointTheSameElementAsPointTest()
+		[TestCase(typeof(CircularDequeArray))]
+		[TestCase(typeof(CircularDequeLinkedList))]
+		public void RearPointTheSameElementAsPointTest(Type circularDequeType)
 		{
 			// Arrange
-			var deque = new CircularDeque(4);
+			var deque = (ICircularDeque)Activator.CreateInstance(circularDequeType, 4);
 
 			// Act & Assert
 			Assert.IsTrue(deque.InsertFront(1));
 			Assert.AreEqual(1, deque.GetRear());
 		}
 
-		[Test]
-		public void FrontTest()
+		[TestCase(typeof(CircularDequeArray))]
+		[TestCase(typeof(CircularDequeLinkedList))]
+		public void FrontTest(Type circularDequeType)
 		{
 			// Arrange
-			var deque = new CircularDeque(3);
+			var deque = (ICircularDeque)Activator.CreateInstance(circularDequeType, 3);
 
 			// Act & Assert
 			Assert.IsTrue(deque.InsertFront(1));
@@ -170,11 +177,12 @@ namespace AlgorithmsTest.Collection
 			Assert.IsTrue(deque.IsEmpty());
 		}
 
-		[Test]
-		public void RearTest()
+		[TestCase(typeof(CircularDequeArray))]
+		[TestCase(typeof(CircularDequeLinkedList))]
+		public void RearTest(Type circularDequeType)
 		{
 			// Arrange
-			var deque = new CircularDeque(3);
+			var deque = (ICircularDeque)Activator.CreateInstance(circularDequeType, 3);
 
 			// Act & Assert
 			Assert.IsTrue(deque.InsertLast(1));

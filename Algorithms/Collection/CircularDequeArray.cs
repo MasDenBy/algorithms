@@ -1,6 +1,6 @@
 ﻿namespace Algorithms.Collection
 {
-	public class CircularDeque
+	public class CircularDequeArray : ICircularDeque
 	{
 		private const int DataMissedCode = -1;
 
@@ -11,7 +11,7 @@
 
 		private int count;
 
-		public CircularDeque(int capacity)
+		public CircularDequeArray(int capacity)
 		{
 			this.values = new int[capacity];
 			this.frontIndex = -1;
