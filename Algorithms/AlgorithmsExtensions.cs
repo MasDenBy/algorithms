@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Algorithms.Sorting
+namespace Algorithms
 {
-	public static class SortingExtensions
+	public static class AlgorithmsExtensions
 	{
 		public static bool BiggerThan(this IComparable value1, IComparable value2)
 		{
