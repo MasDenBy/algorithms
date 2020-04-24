@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using LeetCode.Entities;
+using LeetCode.Extensions;
 using NUnit.Framework;
 
 using static LeetCode.SortedListToBinarySearchTree;
@@ -23,8 +24,8 @@ namespace LeetCode.Test
 			var actualBstRoot = new SortedListToBinarySearchTree().SortedListToBST(linkedList.Head);
 
 			// Assert
-			var actual = BinarySearchTree.Nodes(actualBstRoot).ToList();
-			var expected = BinarySearchTree.Nodes(expectedBst.Root).ToList();
+			var actual = actualBstRoot.Nodes().ToList();
+			var expected = expectedBst.Root.Nodes().ToList();
 
 			for (int i = 0; i < expected.Count; i++)
 				Assert.AreEqual(expected[i].val, actual[i].val);

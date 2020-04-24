@@ -32,14 +32,6 @@ namespace LeetCode
 				this.Root = BuildTree(values, 0, values.Count - 1);
 			}
 
-			public static IEnumerable<TreeNode> Nodes(TreeNode node)
-			{
-				Queue<TreeNode> nodes = new Queue<TreeNode>();
-				Iteration(node, nodes);
-
-				return nodes;
-			}
-
 			private static TreeNode BuildTree(List<int> values, int start, int end)
 			{
 				if (start > end) return null;
@@ -51,16 +43,6 @@ namespace LeetCode
 				node.right = BuildTree(values, middle + 1, end);
 
 				return node;
-			}
-
-			private static void Iteration(TreeNode node, Queue<TreeNode> nodes)
-			{
-				if (node == null) return;
-
-				nodes.Enqueue(node);
-
-				Iteration(node.left, nodes);
-				Iteration(node.right, nodes);
 			}
 
 			private List<int> ConvertToList(ListNode head)
