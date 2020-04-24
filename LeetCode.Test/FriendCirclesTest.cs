@@ -1,7 +1,7 @@
-﻿using Algorithms;
+﻿using LeetCode;
 using NUnit.Framework;
 
-namespace AlgorithmsTest
+namespace LeetCode.Test
 {
 	[TestFixture]
 	public class FriendCirclesTest

@@ -1,4 +1,4 @@
-﻿namespace Algorithms
+﻿namespace LeetCode
 {
 	public class SortColors
 	{
