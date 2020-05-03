@@ -8,43 +8,33 @@ namespace LeetCodeTestRunner
 {
 	internal static class JsonParser
 	{
-		public static Queue<UnitTestOperator> Parse(string input, string expected)
+		internal static Queue<UnitTestOperator> Parse(string input, string expected)
 		{
-			var result = new Queue<UnitTestOperator>();
 			var json = JsonParser.PrepareJsonDocument(input, expected);
 			var operations = JsonSerializer.Deserialize<CodeOperation>(json);
+			var result = new Queue<UnitTestOperator>();
 
-			result.Enqueue(new ConstructorOperator(operations.Operators[0]));
+			result.Enqueue(new ConstructorOperator(operations.Methods[0]));
 
-			for (int i = 1; i < operations.Operators.Count; i++)
-			{
-				if(operations.Expected?[i] == null)
-				{
-					result.Enqueue(new ActionOperator(
-						operations.Operators[i], 
-						operations.Params[i]));
-				}
-				else
-				{
-					result.Enqueue(new FunctionOperator(
-						operations.Operators[i], 
-						operations.Params[i],
-						operations.Expected[i]));
-				}
-			}
+			JsonParser.PopulateOperationsQueue(result, operations, start:1);
 
 			return result;
 		}
 
+		internal static T Parse<T>(string value)
+		{
+			return JsonSerializer.Deserialize<T>(value);
+		}
+
 		private static string PrepareJsonDocument(string input, string expected)
 		{
-			var operatorsEnd = input.IndexOf("]") + 1;
-			var paramsStart = operatorsEnd;
+			var methodsEnd = input.IndexOf("]") + 1;
+			var paramsStart = methodsEnd;
 
 			var sb = new StringBuilder();
 			sb.Append("{")
-			  .Append(@"""Operators"":")
-			  .Append(input.Substring(0, operatorsEnd))
+			  .Append(@"""Methods"":")
+			  .Append(input.Substring(0, methodsEnd))
 			  .Append(@",""Params"":")
 			  .Append(input.Substring(paramsStart, input.Length - paramsStart))
 			  .Append(string.IsNullOrWhiteSpace(expected) ? "" : @",""Expected"":")
@@ -54,9 +44,29 @@ namespace LeetCodeTestRunner
 			return sb.ToString();
 		}
 
+		private static void PopulateOperationsQueue(Queue<UnitTestOperator> queue, CodeOperation codeOperation, int start = 0)
+		{
+			for (int i = start; i < codeOperation.Methods.Count; i++)
+			{
+				if (codeOperation.Expected?[i] == null)
+				{
+					queue.Enqueue(new ActionOperator(
+						codeOperation.Methods[i],
+						codeOperation.Params[i]));
+				}
+				else
+				{
+					queue.Enqueue(new FunctionOperator(
+						codeOperation.Methods[i],
+						codeOperation.Params[i],
+						codeOperation.Expected[i]));
+				}
+			}
+		}
+
 		private class CodeOperation
 		{
-			public IList<string> Operators { get; set; }
+			public IList<string> Methods { get; set; }
 			public IList<object[]> Params { get; set; }
 			public IList<object> Expected { get; set; }
 		}
