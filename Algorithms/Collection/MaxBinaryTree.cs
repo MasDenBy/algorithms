@@ -1,4 +1,5 @@
 ﻿using System;
+using Algorithms.Extensions;
 
 namespace Algorithms.Collection
 {

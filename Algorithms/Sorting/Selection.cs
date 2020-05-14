@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Algorithms.Extensions;
 
 namespace Algorithms.Sorting
 {
