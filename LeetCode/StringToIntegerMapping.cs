@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace LeetCode
 {
@@ -8,57 +7,33 @@ namespace LeetCode
 	/// </summary>
 	public class StringToIntegerMapping
 	{
-		private static readonly string[] alphabet = new string[] {
-			"", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
-			"m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-
 		public string FreqAlphabets(string s)
 		{
-			var queue = new Queue<char>();
 			var sb = new StringBuilder();
 
 			for (int i = 0; i < s.Length; i++)
 			{
-				var value = s[i];
+				var possibleBig = i + 2;
 
-				if(value.Equals('#'))
+				if(possibleBig < s.Length && s[possibleBig] == '#')
 				{
-					ProcessQueue(queue, sb);
+					sb.Append(GetLetter($"{s[i]}{s[i + 1]}"));
+					i = possibleBig;
 				}
 				else
 				{
-					queue.Enqueue(value);
-				}
-			}
-
-			if (queue.Count > 0)
-			{
-				if(s.EndsWith("#"))
-				{
-					ProcessQueue(queue, sb);
-				}
-				else
-				{
-					while (queue.Count > 0)
-						sb.Append(GetLetter(queue.Dequeue().ToString()));
+					sb.Append(GetLetter(s[i].ToString()));
 				}
 			}
 
 			return sb.ToString();
 		}
 
-		private static void ProcessQueue(Queue<char> queue, StringBuilder sb)
-		{
-			while (queue.Count > 2)
-				sb.Append(GetLetter(queue.Dequeue().ToString()));
-
-			sb.Append(GetLetter($"{queue.Dequeue()}{queue.Dequeue()}"));
-		}
-
 		private static string GetLetter(string value)
 		{
 			var index = int.Parse(value);
-			return alphabet[index];
+
+			return ((char)('a' + index - 1)).ToString();
 		}
 	}
 }
