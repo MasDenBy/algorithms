@@ -1,6 +1,4 @@
-﻿using LeetCode.Entities;
-
-namespace LeetCode
+﻿namespace LeetCode
 {
 	/// <summary>
 	/// 81. Search in Rotated Sorted Array II
@@ -9,50 +7,54 @@ namespace LeetCode
 	{
 		public bool Search(int[] nums, int target)
 		{
-			var bst = new BinarySearchTree();
-			bst.Build(nums);
+			if (nums.Length == 0) return false;
+			if (nums.Length == 1) return nums[0] == target;
 
-			return bst.Exists(target);
+			var pivot = FindPivot(nums, 0, nums.Length - 1, target);
+
+			if (nums[pivot] == target) return true;
+			if (nums[0] <= target && nums[pivot - 1] >= target) return BinarySearch(nums, 0, pivot - 1, target) > -1;
+			else return BinarySearch(nums, pivot + 1, nums.Length - 1, target) > -1;
 		}
 
-		private class BinarySearchTree
+		private static int FindPivot(int[] nums, int start, int end, int target)
 		{
-			private TreeNode root;
+			if (start > end) return end;
 
-			public void Build(int[] nums)
+			var middle = (start + end) / 2;
+
+			if (nums[middle] == target) return middle;
+
+			if (middle > 0 && nums[middle - 1] > nums[middle]) return middle;
+			else if (middle < nums.Length - 1 && nums[middle] > nums[middle + 1]) return middle + 1;
+
+			if(nums[start] == nums[middle] && nums[middle] == nums[end])
 			{
-				for (int i = 0; i < nums.Length; i++)
-					this.root = BuildNode(this.root, nums[i]);
-			}
-
-			public bool Exists(int number)
-			{
-				var x = this.root;
-
-				while (x != null)
+				for (int i = start; i < end; i++)
 				{
-					var compResult = number.CompareTo(x.val);
-
-					if (compResult < 0) x = x.left;
-					else if (compResult > 0) x = x.right;
-					else return true;
+					if(nums[start] != nums[i])
+					{
+						return i < middle
+							? FindPivot(nums, i, middle, target)
+							: FindPivot(nums, middle, i, target);
+					}
 				}
-
-				return false;
 			}
 
-			private TreeNode BuildNode(TreeNode node, int value)
-			{
-				if (node == null) return new TreeNode(value);
+			return nums[start] > nums[middle] 
+				? FindPivot(nums, 0, middle, target) 
+				: FindPivot(nums, middle + 1, end, target);
+		}
 
-				var compResult = value.CompareTo(node.val);
+		private static int BinarySearch(int[] nums, int start, int end, int target)
+		{
+			if (start > end) return -1;
 
-				if (compResult < 0) node.left = BuildNode(node.left, value);
-				else if (compResult > 0) node.right = BuildNode(node.right, value);
-				else node.val = value;
+			var middle = (start + end) / 2;
 
-				return node;
-			}
+			if (nums[middle] > target) return BinarySearch(nums, start, middle - 1, target);
+			else if (nums[middle] < target) return BinarySearch(nums, middle + 1, end, target);
+			else return middle;
 		}
 	}
 }
