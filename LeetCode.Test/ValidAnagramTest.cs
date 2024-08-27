@@ -1,16 +1,13 @@
-﻿using NUnit.Framework;
-
-namespace LeetCode.Test
+﻿namespace LeetCode.Test
 {
-	[TestFixture]
 	public class ValidAnagramTest
 	{
-		[TestCase("anagram", "nagaram", true)]
-		[TestCase("rat", "car", false)]
+		[InlineData("anagram", "nagaram", true)]
+		[InlineData("rat", "car", false)]
 		public void IsAnagramTest(string s, string t, bool expected)
 		{
 			// Act
-			Assert.AreEqual(expected, new ValidAnagram().IsAnagram(s, t));
+			Assert.Equal(expected, new ValidAnagram().IsAnagram(s, t));
 		}
 	}
 }

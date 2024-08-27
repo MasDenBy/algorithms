@@ -7,7 +7,7 @@ namespace LeetCode.Test
 	[TestFixture]
 	public class BynaryLinkedListTest
 	{
-		[Test]
+		[Fact]
 		public void Test1()
 		{
 			// Arrange
@@ -20,7 +20,7 @@ namespace LeetCode.Test
 			GetDecimalValueTest(linkedList, 5);
 		}
 
-		[Test]
+		[Fact]
 		public void Test2()
 		{
 			// Arrange
@@ -31,7 +31,7 @@ namespace LeetCode.Test
 			GetDecimalValueTest(linkedList, 0);
 		}
 
-		[Test]
+		[Fact]
 		public void Test3()
 		{
 			// Arrange
@@ -42,7 +42,7 @@ namespace LeetCode.Test
 			GetDecimalValueTest(linkedList, 1);
 		}
 
-		[Test]
+		[Fact]
 		public void Test4()
 		{
 			// Arrange
@@ -67,7 +67,7 @@ namespace LeetCode.Test
 			GetDecimalValueTest(linkedList, 18880);
 		}
 
-		[Test]
+		[Fact]
 		public void Test5()
 		{
 			// Arrange
@@ -85,7 +85,7 @@ namespace LeetCode.Test
 			var number = new BynaryLinkedList().GetDecimalValue(linkedList.First);
 
 			// Assert
-			Assert.That(number, Is.EqualTo(expected));
+			number.Should().Be(expected);
 		}
 	}
 }

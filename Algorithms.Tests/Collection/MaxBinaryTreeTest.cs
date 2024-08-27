@@ -1,13 +1,10 @@
 ﻿using Algorithms.Collection;
 
-using NUnit.Framework;
-
 namespace AlgorithmsTest.Collection
 {
-	[TestFixture]
 	public class MaxBinaryTreeTest
 	{
-		[Test]
+		[Fact]
 		public void AddThreeItemsTest()
 		{
 			// Arrange
@@ -19,10 +16,10 @@ namespace AlgorithmsTest.Collection
 			binaryTree.Add(3);
 
 			// Assert
-			Assert.AreEqual(3, binaryTree.Max);
+			Assert.Equal(3, binaryTree.Max);
 		}
 
-		[Test]
+		[Fact]
 		public void AddFourItemsAndRemoveMaxTest()
 		{
 			// Arrange
@@ -36,7 +33,7 @@ namespace AlgorithmsTest.Collection
 			binaryTree.RemoveMax();
 
 			// Assert
-			Assert.AreEqual(3, binaryTree.Max);
+			Assert.Equal(3, binaryTree.Max);
 		}
 	}
 }

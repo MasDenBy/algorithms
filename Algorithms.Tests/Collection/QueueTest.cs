@@ -1,60 +1,57 @@
 ﻿using System.Text;
-using Algorithms.Collection;
-using NUnit.Framework;
 
 namespace AlgorithmsTest.Collection
 {
-	[TestFixture]
-	public class QueueTest
+    public class QueueTest
 	{
-		[Test]
+		[Fact]
 		public void DequeueIfEmptyShouldReturnDefaultTest()
 		{
 			// Arrange
-			var queue = new Queue<string>();
+			var queue = new Algorithms.Collection.Queue<string>();
 
 			// Act
 			var result = queue.Dequeue();
 
 			// Assert
-			Assert.IsNull(result);
+			Assert.Null(result);
 		}
 
-		[Test]
+		[Fact]
 		public void EnqueueShouldAddElementTest()
 		{
 			// Arrange
 			const string test = "1";
-			var queue = new Queue<string>();
+			var queue = new Algorithms.Collection.Queue<string>();
 
 			// Act
 			queue.Enqueue(test);
 
-			// Assert
-			Assert.That(queue.Peek(), Is.EqualTo(test));
+            // Assert
+            queue.Peek().Should().Be(test);
 		}
 
-		[Test]
+		[Fact]
 		public void EnqueueAndDequeueTest()
 		{
 			// Arrange
 			const string test = "1";
-			var queue = new Queue<string>();
+			var queue = new Algorithms.Collection.Queue<string>();
 
 			// Act
 			queue.Enqueue(test);
 			var actual = queue.Dequeue();
 
 			// Assert
-			Assert.That(actual, Is.EqualTo(test));
-			Assert.IsNull(queue.Peek());
+			actual.Should().Be(test);
+			Assert.Null(queue.Peek());
 		}
 
-		[Test]
+		[Fact]
 		public void EnqueueWithResizeTest()
 		{
 			// Arrange
-			var queue = new Queue<string>();
+			var queue = new Algorithms.Collection.Queue<string>();
 
 			// Act
 			queue.Enqueue("1");
@@ -67,12 +64,12 @@ namespace AlgorithmsTest.Collection
 			queue.Enqueue("6");
 
 			var sb = new StringBuilder();
-			string data = null;
+			string? data = null;
 			while ((data = queue.Dequeue()) != null)
 				sb.Append(data);
 
 			// Assert
-			Assert.That(sb.ToString(), Is.EqualTo("3456"));
+			sb.ToString().Should().Be("3456");
 		}
 	}
 }

@@ -1,74 +1,69 @@
-﻿using LeetCode;
-using NUnit.Framework;
+﻿namespace LeetCode.Test;
 
-namespace LeetCode.Test
+public class FriendCirclesTest
 {
-	[TestFixture]
-	public class FriendCirclesTest
-	{
-		[Test]
-		public void FindCircleNumTwoGroupTest()
-		{
-			// Arrange
-			var m = new int[3][];
-			m[0] = new int[3] { 1, 1, 0 };
-			m[1] = new int[3] { 1, 1, 0 };
-			m[2] = new int[3] { 0, 0, 1 };
+    [Fact]
+    public void FindCircleNumTwoGroupTest()
+    {
+        // Arrange
+        var m = new int[3][];
+        m[0] = [1, 1, 0];
+        m[1] = [1, 1, 0];
+        m[2] = [0, 0, 1];
 
-			// Act
-			var count = new FriendCircles().FindCircleNum(m);
+        // Act
+        var count = new FriendCircles().FindCircleNum(m);
 
-			// Assert
-			Assert.AreEqual(2, count);
-		}
+        // Assert
+        count.Should().Be(2);
+    }
 
-		[Test]
-		public void FindCircleNumOneGroupTest()
-		{
-			// Arrange
-			var m = new int[3][];
-			m[0] = new int[3] { 1, 1, 0 };
-			m[1] = new int[3] { 1, 1, 1 };
-			m[2] = new int[3] { 0, 1, 1 };
+    [Fact]
+    public void FindCircleNumOneGroupTest()
+    {
+        // Arrange
+        var m = new int[3][];
+        m[0] = [1, 1, 0];
+        m[1] = [1, 1, 1];
+        m[2] = [0, 1, 1];
 
-			// Act
-			var count = new FriendCircles().FindCircleNum(m);
+        // Act
+        var count = new FriendCircles().FindCircleNum(m);
 
-			// Assert
-			Assert.AreEqual(1, count);
-		}
+        // Assert
+        count.Should().Be(1);
+    }
 
-		[Test]
-		public void FindCircleNumThreeGroupTest()
-		{
-			// Arrange
-			var m = new int[3][];
-			m[0] = new int[3] { 1, 0, 0 };
-			m[1] = new int[3] { 0, 1, 0 };
-			m[2] = new int[3] { 0, 0, 1 };
+    [Fact]
+    public void FindCircleNumThreeGroupTest()
+    {
+        // Arrange
+        var m = new int[3][];
+        m[0] = [1, 0, 0];
+        m[1] = [0, 1, 0];
+        m[2] = [0, 0, 1];
 
-			// Act
-			var count = new FriendCircles().FindCircleNum(m);
+        // Act
+        var count = new FriendCircles().FindCircleNum(m);
 
-			// Assert
-			Assert.AreEqual(3, count);
-		}
+        // Assert
+        count.Should().Be(3);
+    }
 
-		[Test]
-		public void FindCircleNumOneGroupFourPeopleTest()
-		{
-			// Arrange
-			var m = new int[4][];
-			m[0] = new int[4] { 1, 0, 0, 1 };
-			m[1] = new int[4] { 0, 1, 1, 0 };
-			m[2] = new int[4] { 0, 1, 1, 1 };
-			m[3] = new int[4] { 1, 0, 1, 1 };
+    [Fact]
+    public void FindCircleNumOneGroupFourPeopleTest()
+    {
+        // Arrange
+        var m = new int[4][];
+        m[0] = [1, 0, 0, 1];
+        m[1] = [0, 1, 1, 0];
+        m[2] = [0, 1, 1, 1];
+        m[3] = [1, 0, 1, 1];
 
-			// Act
-			var count = new FriendCircles().FindCircleNum(m);
+        // Act
+        var count = new FriendCircles().FindCircleNum(m);
 
-			// Assert
-			Assert.AreEqual(1, count);
-		}
-	}
+        // Assert
+        count.Should().Be(1);
+    }
 }

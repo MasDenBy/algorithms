@@ -1,12 +1,10 @@
 ﻿using Algorithms.Text;
-using NUnit.Framework;
 
 namespace AlgorithmsTest.Text
 {
-	[TestFixture]
 	public class StringBuilderTest
 	{
-		[Test]
+		[Fact]
 		public void AppendWithoutAllocationTest()
 		{
 			// Arrange
@@ -21,10 +19,10 @@ namespace AlgorithmsTest.Text
 			var text = sb.ToString();
 
 			// Assert
-			Assert.AreEqual("abc  def ", text);
+			Assert.Equal("abc  def ", text);
 		}
 
-		[Test]
+		[Fact]
 		public void AppendWithAllocationTest()
 		{
 			// Arrange
@@ -39,7 +37,7 @@ namespace AlgorithmsTest.Text
 			var text = sb.ToString();
 
 			// Assert
-			Assert.AreEqual(
+			Assert.Equal(
 				"Lorem ipsum dolor sit amet. Quisque tincidunt finibus enim, quis vehicula enim posuere et. Nam sagittis nibh a gravida consectetur.", 
 				text);
 		}

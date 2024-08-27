@@ -1,12 +1,11 @@
 ﻿using Algorithms.Sorting;
-using NUnit.Framework;
+using FluentAssertions;
 
 namespace AlgorithmsTest.Sorting
 {
-	[TestFixture]
 	public class HeapTest
 	{
-		[Test]
+		[Fact]
 		public void SortIntTest()
 		{
 			// Arrange
@@ -16,10 +15,10 @@ namespace AlgorithmsTest.Sorting
 			Heap.Sort(values);
 
 			// Assert
-			CollectionAssert.AreEqual(new[] { 2, 3, 5, 5, 7, 8, 9, 12, 34 }, values);
+			values.Should().BeEquivalentTo([ 2, 3, 5, 5, 7, 8, 9, 12, 34 ]);
 		}
 
-		[Test]
+		[Fact]
 		public void SortCharTest()
 		{
 			// Arrange
@@ -29,7 +28,7 @@ namespace AlgorithmsTest.Sorting
 			Heap.Sort(values);
 
 			// Assert
-			CollectionAssert.AreEqual(new[] { 'a', 'e', 'e', 'l', 'm', 'o', 'p', 'r', 's', 't', 'x' }, values);
+			values.Should().BeEquivalentTo(['a', 'e', 'e', 'l', 'm', 'o', 'p', 'r', 's', 't', 'x']);
 		}
 	}
 }

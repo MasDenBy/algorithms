@@ -1,13 +1,10 @@
-﻿using System.Linq;
-using LeetCode.Extensions;
-using NUnit.Framework;
+﻿using LeetCode.Extensions;
 
 namespace LeetCode.Test
 {
-	[TestFixture]
-	public class SortedArrayToBinarySearchTreeTest
+    public class SortedArrayToBinarySearchTreeTest
 	{
-		[TestCase(new[] { -10, -3, 0, 5, 9 }, new int[] { 0, -10, -3, 5, 9 })]
+		[InlineData(new[] { -10, -3, 0, 5, 9 }, new int[] { 0, -10, -3, 5, 9 })]
 		public void SortedListToBSTTest(int[] values, int[] expected)
 		{
 			// Act
@@ -17,7 +14,7 @@ namespace LeetCode.Test
 			var actual = actualBstRoot.Nodes().ToList();
 
 			for (int i = 0; i < expected.Length; i++)
-				Assert.AreEqual(expected[i], actual[i].val);
+				Assert.Equal(expected[i], actual[i].val);
 		}
 	}
 }

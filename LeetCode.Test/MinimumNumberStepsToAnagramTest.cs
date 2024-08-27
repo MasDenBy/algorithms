@@ -1,22 +1,19 @@
-﻿using NUnit.Framework;
-
-namespace LeetCode.Test
+﻿namespace LeetCode.Test
 {
-	[TestFixture]
-	public class MinimumNumberStepsToAnagramTest
+    public class MinimumNumberStepsToAnagramTest
 	{
-		[TestCase("bab", "aba", 1)]
-		[TestCase("leetcode", "practice", 5)]
-		[TestCase("anagram", "mangaar", 0)]
-		[TestCase("xxyyzz", "xxyyzz", 0)]
-		[TestCase("friend", "family", 4)]
+		[InlineData("bab", "aba", 1)]
+		[InlineData("leetcode", "practice", 5)]
+		[InlineData("anagram", "mangaar", 0)]
+		[InlineData("xxyyzz", "xxyyzz", 0)]
+		[InlineData("friend", "family", 4)]
 		public void MinStepsTest(string s, string t, int expected)
 		{
 			// Arrange & Act
 			var actual = new MinimumNumberStepsToAnagram().MinSteps(s, t);
 
 			// Assert
-			Assert.AreEqual(expected, actual);
+			Assert.Equal(expected, actual);
 		}
 	}
 }

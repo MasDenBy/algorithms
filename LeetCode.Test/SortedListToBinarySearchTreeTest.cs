@@ -1,16 +1,13 @@
-﻿using System.Linq;
-using LeetCode.Entities;
+﻿using LeetCode.Entities;
 using LeetCode.Extensions;
-using NUnit.Framework;
 
 using static LeetCode.SortedListToBinarySearchTree;
 
 namespace LeetCode.Test
 {
-	[TestFixture]
-	public class SortedListToBinarySearchTreeTest
+    public class SortedListToBinarySearchTreeTest
 	{
-		[TestCase(new[] { -10, -3, 0, 5, 9 }, new object[] { 0, -10, 5, -3, 9 })]
+		[InlineData(new[] { -10, -3, 0, 5, 9 }, new object[] { 0, -10, 5, -3, 9 })]
 		public void SortedListToBSTTest(int[] values, object[] expectedValues)
 		{
 			// Arrange
@@ -28,7 +25,7 @@ namespace LeetCode.Test
 			var expected = expectedBst.Root.Nodes().ToList();
 
 			for (int i = 0; i < expected.Count; i++)
-				Assert.AreEqual(expected[i].val, actual[i].val);
+				Assert.Equal(expected[i].val, actual[i].val);
 		}
 
 		private class LinkedList
